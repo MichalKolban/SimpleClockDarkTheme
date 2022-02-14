@@ -1,15 +1,14 @@
 const { resolve } = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: "./src/js/app.js",
   output: {
-    filename: "bundle.js",
     path: resolve(__dirname, "dist"),
+      filename: "bundle.js",
   },
-  plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [
       {
@@ -18,11 +17,11 @@ module.exports = {
       },
     ],
   },
-
   optimization: {
+    minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
-      new UglifyJsPlugin()
+      new TerserPlugin()
     ],
   },
   plugins: [new MiniCssExtractPlugin({filename: 'style.css'})],
