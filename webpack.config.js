@@ -4,7 +4,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: "./src/js/app.js",
+  // entry: "./src/js/app.js",
+  entry: "./src/ts/app.ts",
   output: {
     path: resolve(__dirname, "dist"),
       filename: "bundle.js",
@@ -15,7 +16,15 @@ module.exports = {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      }
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   optimization: {
     minimize: true,
