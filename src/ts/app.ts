@@ -7,8 +7,16 @@ const ballCheckbox = document.querySelector(".ball-checkbox") as HTMLElement;
 const container = document.querySelector(".container") as HTMLElement;
 const timeBox = document.querySelector(".current-time-box") as HTMLElement;
 
+function loadTime(){
+  const timeNow = new Date(Date.now());
+  const { h, m, s } = properDisplay(timeNow);
+  setDisplayContent(hoursElement, h);
+  setDisplayContent(minutesElement, m);
+  setDisplayContent(secondsElement, s);
+}
+
 setInterval(() => {
-  initClock();
+  initClock(); 
 }, 1000);
 
 function initClock() {
@@ -62,3 +70,5 @@ ballCheckbox.addEventListener("click", (e) => {
   container.classList.toggle("container-dark");
   timeBox.classList.toggle("current-time-box-dark");
 });
+
+loadTime();
